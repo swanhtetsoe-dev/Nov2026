@@ -37,8 +37,13 @@ namespace Nov2026.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateQuestion(QuestionCreateRequestModel requestModel)
         {
+            int nextId = _db.Project1Questions.Any()
+                ? _db.Project1Questions.Max(x => x.QuestionId) + 1
+                : 1;
+
             _db.Project1Questions.Add(new Project1Question
             {
+                QuestionId   = nextId,
                 QuestionNo   = requestModel.QuestionNo,
                 QuestionName = requestModel.QuestionName.Trim(),
             });

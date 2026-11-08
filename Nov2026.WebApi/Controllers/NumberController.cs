@@ -37,17 +37,18 @@ namespace Nov2026.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateNumber(NumberCreateRequestModel requestModel)
         {
+
             _db.Project1Numbers.Add(new Project1Number
             {
-                Column1 = requestModel.Column1,
-                Column2 = requestModel.Column2,
-                Column3 = requestModel.Column3,
-                Column4 = requestModel.Column4,
-                Column5 = requestModel.Column5,
-                Column6 = requestModel.Column6,
-                Column7 = requestModel.Column7,
-                Column8 = requestModel.Column8,
-                Column9 = requestModel.Column9,
+                Column1  = requestModel.Column1,
+                Column2  = requestModel.Column2,
+                Column3  = requestModel.Column3,
+                Column4  = requestModel.Column4,
+                Column5  = requestModel.Column5,
+                Column6  = requestModel.Column6,
+                Column7  = requestModel.Column7,
+                Column8  = requestModel.Column8,
+                Column9  = requestModel.Column9,
             });
             int result = _db.SaveChanges();
             string message = result > 0 ? "Saving Successful." : "Saving Failed.";

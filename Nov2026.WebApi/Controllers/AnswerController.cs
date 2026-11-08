@@ -27,7 +27,7 @@ namespace Nov2026.WebApi.Controllers
         public IActionResult GetAnswerByQuestionNumberAndNumber(int questionNumber, int number)
         {
             var question = _db.Project1Questions
-                .FirstOrDefault(x => x.QuestionNo == questionNumber);
+                .FirstOrDefault(x => x.QuestionId == questionNumber);
             if (question is null)
             {
                 return NotFound($"Question with QuestionNo '{questionNumber}' not found.");
@@ -81,6 +81,7 @@ namespace Nov2026.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateAnswer(AnswerCreateRequestModel requestModel)
         {
+
             _db.Project1Answers.Add(new Project1Answer
             {
                 QuestionId   = requestModel.QuestionId,
