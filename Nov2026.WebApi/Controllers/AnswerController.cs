@@ -23,6 +23,42 @@ namespace Nov2026.WebApi.Controllers
             return Ok(lst);
         }
 
+        [HttpGet("search")]
+        public IActionResult GetAnswerByQuestionNumberAndNumber(int questionNumber, int number)
+        {
+            var question = _db.Project1Questions
+                .FirstOrDefault(x => x.QuestionNo == questionNumber);
+            if (question is null)
+            {
+                return NotFound($"Question with QuestionNo '{questionNumber}' not found.");
+            }
+
+            var numberRow = _db.Project1Numbers.FirstOrDefault(x =>
+                x.Column1 == number ||
+                x.Column2 == number ||
+                x.Column3 == number ||
+                x.Column4 == number ||
+                x.Column5 == number ||
+                x.Column6 == number ||
+                x.Column7 == number ||
+                x.Column8 == number ||
+                x.Column9 == number);
+            if (numberRow is null)
+            {
+                return NotFound($"No Number row found containing the value '{number}'.");
+            }
+
+            var answer = _db.Project1Answers
+                .FirstOrDefault(x => x.QuestionId == question.QuestionId
+                                  && x.AnswerNo   == number);
+            if (answer is null)
+            {
+                return NotFound($"Answer not found for QuestionNo '{questionNumber}' and Number '{number}'.");
+            }
+
+            return Ok(answer);
+        }
+
         [HttpGet("Edit/{id}")]
         public IActionResult GetAnswer(int id)
         {
