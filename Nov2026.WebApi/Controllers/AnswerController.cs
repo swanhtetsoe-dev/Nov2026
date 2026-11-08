@@ -56,7 +56,15 @@ namespace Nov2026.WebApi.Controllers
                 return NotFound($"Answer not found for QuestionNo '{questionNumber}' and Number '{number}'.");
             }
 
-            return Ok(answer);
+            return Ok(new
+            {
+                answer.AnswerId,
+                answer.QuestionId,
+                QuestionNo   = question.QuestionNo,
+                QuestionName = question.QuestionName,
+                answer.AnswerNo,
+                answer.AnswerResult
+            });
         }
 
         [HttpGet("Edit/{id}")]
